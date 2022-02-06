@@ -1,10 +1,32 @@
-// import pakietów
-const http = require("http");
-const app = require("./app");
-const port = process.env.port || 3000;
+const ArtPages = require('./src/routes/artPages')
+const comments = require('./src/routes/comments');
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
+const app = express();
+const port = 8080;
 
-const server = http.createServer(app);
 
-server.listen(port);
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+mongoose.connect("mongodb+srv://Szafira:usreuMJM4SUhK7to@portfoliocluster.lulnj.mongodb.net/AdminDatabase")
+const connection = mongoose.connection;
+
+connection.once('open', () => {
+  console.log("Połączono!");
+})
 
 
+app.use('/', ArtPages);
+app.use('/login', comments);
+
+
+app.listen(port, () => {
+    console.log(`Server is running on port: ${port}`);
+   
+}
+);
