@@ -1,0 +1,1 @@
+const art = require('../models/art')
