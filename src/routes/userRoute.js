@@ -8,7 +8,7 @@ router.post("/login",(req, res) => {
     .then(users => 
       {
       if(users == null)
-      { res.json("Błędny login lub hasło!")
+      { res.json("Fail!")
       } else {
         res.json(users.id)
       }
