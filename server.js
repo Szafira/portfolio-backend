@@ -1,5 +1,6 @@
 const ArtPages = require('./src/routes/artPages')
 const comments = require('./src/routes/comments');
+const userRoute = require('./src/routes/userRoute');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require("body-parser");
@@ -20,10 +21,9 @@ connection.once('open', () => {
   console.log("Połączono!");
 })
 
-
 app.use('/', ArtPages);
 app.use('/login', comments);
-
+app.use('/account', userRoute);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
